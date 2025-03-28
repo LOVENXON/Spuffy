@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>348</width>
+    <height>530</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Login Spuffy</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../../.designer/backup/kitty.png</normaloff>../../../.designer/backup/kitty.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Estilo general para la aplicación */
+QWidget {
+    background-color: #1e1e1e; /* Fondo oscuro */
+    color: #d4d4d4; /* Texto claro */
+    font-family: 'Segoe UI', sans-serif; /* Fuente moderna de Windows */
+    font-size: 12px;
+}
+
+/* Botones (QPushButton) */
+QPushButton {
+    background-color: #3a3d41; /* Fondo oscuro para botones */
+    color: #ffffff; /* Texto blanco */
+    border: none;
+    border-radius: 6px; /* Esquinas redondeadas */
+    padding: 8px 16px;
+}
+QPushButton:hover {
+    background-color: #505357; /* Fondo más claro al pasar el ratón */
+}
+QPushButton:pressed {
+    background-color: #292b2f; /* Fondo más oscuro al presionar */
+}
+
+/* Campos de texto (QLineEdit, QPlainTextEdit, QTextEdit) */
+QLineEdit, QPlainTextEdit, QTextEdit {
+    background-color: #252526; /* Fondo oscuro */
+    color: #d4d4d4; /* Texto claro */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    border-radius: 6px;
+    padding: 4px;
+}
+QLineEdit:focus, QPlainTextEdit:focus, QTextEdit:focus {
+    border: 1px solid #0078d4; /* Borde azul al enfocar */
+}
+
+/* Tablas (QTableWidget, QTreeWidget) */
+QTableWidget, QTreeWidget {
+    background-color: #252526; /* Fondo oscuro */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    border-radius: 6px;
+    gridline-color: #404040; /* Líneas de tabla más claras */
+    color: #d4d4d4; /* Texto claro */
+}
+QTableWidget::item, QTreeWidget::item {
+    padding: 8px;
+}
+QHeaderView::section {
+    background-color: #333333; /* Fondo ligeramente más claro */
+    color: #d4d4d4; /* Texto claro */
+    border: none;
+    padding: 8px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Scroll en tablas */
+QTableWidget QScrollBar:vertical, QTreeWidget QScrollBar:vertical {
+    background-color: #2a2a2a; /* Fondo oscuro para barra */
+    border: none;
+    width: 10px;
+}
+QTableWidget QScrollBar::handle:vertical, QTreeWidget QScrollBar::handle:vertical {
+    background-color: #3a3d41; /* Manija gris */
+    border-radius: 5px;
+}
+QTableWidget QScrollBar::handle:vertical:hover, QTreeWidget QScrollBar::handle:vertical:hover {
+    background-color: #505357; /* Manija más clara al pasar el ratón */
+}
+
+/* Comboboxes (QComboBox) */
+QComboBox {
+    background-color: #252526; /* Fondo oscuro */
+    color: #d4d4d4; /* Texto claro */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    border-radius: 6px;
+    padding: 4px;
+}
+QComboBox:hover {
+    border: 1px solid #0078d4; /* Borde azul al pasar el ratón */
+}
+QComboBox::drop-down {
+    border: none;
+    background-color: #333333; /* Fondo ligeramente más claro */
+}
+
+/* Barras de progreso (QProgressBar) */
+QProgressBar {
+    background-color: #3c3c3c; /* Fondo gris oscuro */
+    color: #ffffff; /* Texto blanco */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    border-radius: 6px;
+    text-align: center;
+}
+QProgressBar::chunk {
+    background-color: #0078d4; /* Azul progreso */
+    border-radius: 6px;
+}
+
+/* Sliders (QSlider) */
+QSlider::groove:horizontal, QSlider::groove:vertical {
+    background-color: #3c3c3c; /* Canal gris oscuro */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    height: 8px; /* Ancho del canal */
+    border-radius: 4px;
+}
+QSlider::handle:horizontal, QSlider::handle:vertical {
+    background-color: #0078d4; /* Control azul */
+    border: 1px solid #005a9e; /* Borde azul oscuro */
+    border-radius: 6px;
+    width: 14px; /* Tamaño del controlador */
+    height: 14px;
+}
+QSlider::handle:hover {
+    background-color: #005a9e;
+}
+
+/* Casillas de verificación (QCheckBox) */
+QCheckBox {
+    spacing: 5px;
+}
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    background-color: #252526; /* Fondo oscuro */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    border-radius: 4px;
+}
+QCheckBox::indicator:checked {
+    background-color: #0078d4; /* Azul al seleccionar */
+    border: 1px solid #005a9e; /* Borde azul */
+}
+
+/* Pestañas (QTabWidget) */
+QTabWidget::pane {
+    border: 1px solid #3c3c3c;
+    border-radius: 6px;
+}
+QTabBar::tab {
+    background-color: #252526; /* Fondo oscuro */
+    color: #d4d4d4; /* Texto claro */
+    border: 1px solid #3c3c3c;
+    border-radius: 6px;
+    padding: 8px;
+}
+QTabBar::tab:selected {
+    background-color: #333333; /* Fondo más claro */
+    border: 1px solid #0078d4;
+    color: #ffffff; /* Texto blanco */
+}
+
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="widget_8" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>57</height>
+      </size>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_7">
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="widget" native="true">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="1">
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>55</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="0">
+          <spacer name="horizontalSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>32</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="1" column="1">
+          <widget class="QWidget" name="widget_2" native="true">
+           <property name="minimumSize">
+            <size>
+             <width>200</width>
+             <height>300</height>
+            </size>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="QWidget" name="widget_3" native="true">
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <property name="leftMargin">
+                <number>0</number>
+               </property>
+               <property name="topMargin">
+                <number>0</number>
+               </property>
+               <property name="rightMargin">
+                <number>0</number>
+               </property>
+               <property name="bottomMargin">
+                <number>0</number>
+               </property>
+               <item alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="label_2">
+                 <property name="font">
+                  <font>
+                   <family>Segoe UI,sans-serif</family>
+                   <pointsize>-1</pointsize>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">font-family: 'Segoe UI', sans-serif;
+font-size: 40px;</string>
+                 </property>
+                 <property name="text">
+                  <string>SPUFFY2.0</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_4" native="true">
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>40</height>
+               </size>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <item alignment="Qt::AlignHCenter">
+                <widget class="QLabel" name="label">
+                 <property name="styleSheet">
+                  <string notr="true">font-family: 'Segoe UI', sans-serif;
+font-size: 16px;</string>
+                 </property>
+                 <property name="text">
+                  <string>Login</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_6" native="true">
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QLineEdit" name="lineEdit">
+                 <property name="minimumSize">
+                  <size>
+                   <width>171</width>
+                   <height>31</height>
+                  </size>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Token Input</string>
+                 </property>
+                 <property name="clearButtonEnabled">
+                  <bool>true</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton">
+                 <property name="minimumSize">
+                  <size>
+                   <width>171</width>
+                   <height>31</height>
+                  </size>
+                 </property>
+                 <property name="cursor">
+                  <cursorShape>PointingHandCursor</cursorShape>
+                 </property>
+                 <property name="text">
+                  <string>Log in</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_5" native="true">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>50</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>50</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>32</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item row="2" column="1">
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>54</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="widget_7" native="true">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>20</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QLabel" name="label_3">
+           <property name="styleSheet">
+            <string notr="true">font-family: 'Segoe UI', sans-serif;
+font-size: 10px;</string>
+           </property>
+           <property name="text">
+            <string>Developed by GALAXIBYTE</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

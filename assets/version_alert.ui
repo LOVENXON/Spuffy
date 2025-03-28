@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>310</width>
+    <height>182</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Estilo general para la aplicación */
+QWidget {
+    background-color: #1e1e1e; /* Fondo oscuro */
+    color: #d4d4d4; /* Texto claro */
+    font-family: 'Segoe UI', sans-serif; /* Fuente moderna de Windows */
+    font-size: 12px;
+}
+
+/* Botones (QPushButton) */
+QPushButton {
+    background-color: #3a3d41; /* Fondo oscuro para botones */
+    color: #ffffff; /* Texto blanco */
+    border: none;
+    border-radius: 6px; /* Esquinas redondeadas */
+    padding: 8px 16px;
+}
+QPushButton:hover {
+    background-color: #505357; /* Fondo más claro al pasar el ratón */
+}
+QPushButton:pressed {
+    background-color: #292b2f; /* Fondo más oscuro al presionar */
+}
+
+/* Campos de texto (QLineEdit, QPlainTextEdit, QTextEdit) */
+QLineEdit, QPlainTextEdit, QTextEdit {
+    background-color: #252526; /* Fondo oscuro */
+    color: #d4d4d4; /* Texto claro */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    border-radius: 6px;
+    padding: 4px;
+}
+QLineEdit:focus, QPlainTextEdit:focus, QTextEdit:focus {
+    border: 1px solid #0078d4; /* Borde azul al enfocar */
+}
+
+/* Tablas (QTableWidget, QTreeWidget) */
+QTableWidget, QTreeWidget {
+    background-color: #252526; /* Fondo oscuro */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    border-radius: 6px;
+    gridline-color: #404040; /* Líneas de tabla más claras */
+    color: #d4d4d4; /* Texto claro */
+}
+QTableWidget::item, QTreeWidget::item {
+    padding: 8px;
+}
+QHeaderView::section {
+    background-color: #333333; /* Fondo ligeramente más claro */
+    color: #d4d4d4; /* Texto claro */
+    border: none;
+    padding: 8px;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* Scroll en tablas */
+QTableWidget QScrollBar:vertical, QTreeWidget QScrollBar:vertical {
+    background-color: #2a2a2a; /* Fondo oscuro para barra */
+    border: none;
+    width: 10px;
+}
+QTableWidget QScrollBar::handle:vertical, QTreeWidget QScrollBar::handle:vertical {
+    background-color: #3a3d41; /* Manija gris */
+    border-radius: 5px;
+}
+QTableWidget QScrollBar::handle:vertical:hover, QTreeWidget QScrollBar::handle:vertical:hover {
+    background-color: #505357; /* Manija más clara al pasar el ratón */
+}
+
+/* Comboboxes (QComboBox) */
+QComboBox {
+    background-color: #252526; /* Fondo oscuro */
+    color: #d4d4d4; /* Texto claro */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    border-radius: 6px;
+    padding: 4px;
+}
+QComboBox:hover {
+    border: 1px solid #0078d4; /* Borde azul al pasar el ratón */
+}
+QComboBox::drop-down {
+    border: none;
+    background-color: #333333; /* Fondo ligeramente más claro */
+}
+
+/* Barras de progreso (QProgressBar) */
+QProgressBar {
+    background-color: #3c3c3c; /* Fondo gris oscuro */
+    color: #ffffff; /* Texto blanco */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    border-radius: 6px;
+    text-align: center;
+}
+QProgressBar::chunk {
+    background-color: #0078d4; /* Azul progreso */
+    border-radius: 6px;
+}
+
+/* Sliders (QSlider) */
+QSlider::groove:horizontal, QSlider::groove:vertical {
+    background-color: #3c3c3c; /* Canal gris oscuro */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    height: 8px; /* Ancho del canal */
+    border-radius: 4px;
+}
+QSlider::handle:horizontal, QSlider::handle:vertical {
+    background-color: #0078d4; /* Control azul */
+    border: 1px solid #005a9e; /* Borde azul oscuro */
+    border-radius: 6px;
+    width: 14px; /* Tamaño del controlador */
+    height: 14px;
+}
+QSlider::handle:hover {
+    background-color: #005a9e;
+}
+
+/* Casillas de verificación (QCheckBox) */
+QCheckBox {
+    spacing: 5px;
+}
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+    background-color: #252526; /* Fondo oscuro */
+    border: 1px solid #3c3c3c; /* Borde gris */
+    border-radius: 4px;
+}
+QCheckBox::indicator:checked {
+    background-color: #0078d4; /* Azul al seleccionar */
+    border: 1px solid #005a9e; /* Borde azul */
+}
+
+/* Pestañas (QTabWidget) */
+QTabWidget::pane {
+    border: 1px solid #3c3c3c;
+    border-radius: 6px;
+}
+QTabBar::tab {
+    background-color: #252526; /* Fondo oscuro */
+    color: #d4d4d4; /* Texto claro */
+    border: 1px solid #3c3c3c;
+    border-radius: 6px;
+    padding: 8px;
+}
+QTabBar::tab:selected {
+    background-color: #333333; /* Fondo más claro */
+    border: 1px solid #0078d4;
+    color: #ffffff; /* Texto blanco */
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item alignment="Qt::AlignHCenter">
+       <widget class="QLabel" name="label">
+        <property name="styleSheet">
+         <string notr="true">border:none;font-family: 'Segoe UI', sans-serif;
+font-size: 20px;</string>
+        </property>
+        <property name="text">
+         <string>New version available.
+Please contact support to 
+get the new version of Spuffy.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
