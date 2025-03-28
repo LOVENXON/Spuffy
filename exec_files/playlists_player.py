@@ -1,18 +1,20 @@
 import random
 from time import sleep
 from exec_files.AndroRPA.platforms.spotify import playback, connection
+from exec_files.AndroRPA.platforms.spotify.auth import Authentication
 from spotify_android_lib.spotify import Spotify
 from galaxi_android_lib.utils import list_devices
 import json
 from pymsgbox import alert
 
 data_path = 'C:/AndroRPA/data'
-def main(serial):
+def main(serial, subscription='basic'):
     while True:
         try:
             spotify = playback.Playback(serial)
             device = spotify.device
-            apps_list = device.device_from_core.device.app_list('spotify')
+            apps_list = Authentication(serial, subscription)
+            apps_list = apps_list.spotify_apps_package_list
 
             with open(f"{data_path}/playlists_file.json", 'r', encoding='utf-8') as f:
                 playlists_data = json.load(f)
@@ -29,14 +31,31 @@ def main(serial):
 
                 sleep(random.randint(600, 800))
 
-
-
         except Exception as e:
             print(f"Error {e}")
 
 
 if __name__ == "__main__":
     try:
+        # validation -------------------------
+        from utils.utils_methods import get_system_uuid
+        from token__ import validate_jwt
+        import json
+
+        data_path = "c:/AndroRPA/data"
+        with open(f"{data_path}/token.json", 'r', encoding="utf-8") as f:
+            token_data = json.load(f)
+            jwt_token = token_data.get('token')
+
+        with open(f"{data_path}/user_data.json", 'r', encoding="utf-8") as f:
+            user_data = json.load(f)
+            user_subscription = user_data.get('subscription')
+
+        system_uuid = get_system_uuid()
+        r = validate_jwt(jwt_token, system_uuid)
+        if not r['is_valid']:
+            alert(title="Invalid token", text="Invalid token")
+            exit(1)
         from threading import Thread
 
         thread_list = []

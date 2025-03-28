@@ -91,7 +91,7 @@ if __name__ == "__main__":
 
         for serial in device.Device.get_all_devices():
             print(f'Starting on device: {serial}')
-            main(serial)
+            main(serial, user_subscription)
 
         alert(title='Auth', text='Login successfully in all devices')
     except Exception as e:
