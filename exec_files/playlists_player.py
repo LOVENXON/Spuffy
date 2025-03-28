@@ -1,62 +1,34 @@
 import random
 from time import sleep
-
+from exec_files.AndroRPA.platforms.spotify import playback, connection
 from spotify_android_lib.spotify import Spotify
 from galaxi_android_lib.utils import list_devices
-from database_manager import sql_methods
+import json
 from pymsgbox import alert
-import os
 
+data_path = 'C:/AndroRPA/data'
 def main(serial):
     while True:
         try:
-            device = Spotify(serial)
+            spotify = playback.Playback(serial)
+            device = spotify.device
+            apps_list = device.device_from_core.device.app_list('spotify')
 
-            # load playlists lists
-            playlists = []
-            with open(sql_methods.get_setting('playlists_file'), 'r') as f:
-                for playlist in f.readlines():
-                    playlists.append(playlist.strip())
+            with open(f"{data_path}/playlists_file.json", 'r', encoding='utf-8') as f:
+                playlists_data = json.load(f)
+                playlists_data_text_file = playlists_data['playlists_file']
 
-            # start listening music
-            ready_apps = []
+            with open(playlists_data_text_file, 'r') as f:
+                playlists = [line.strip() for line in f.readlines()]
+
             while True:
-                for app in device.app_lists:
-                    # check if app is ready to play music
-                    already_app = True
-                    device.spotify_start(app)
-                    while True:
-                        if device.device.xpath(f'//android.widget.Button[@text="Log in"]').exists:
-                            device.spotify_close(app)
-                            already_app = False
-                            break
-                        if device.device.xpath(f'//*[@content-desc="Search"]').exists:
-                            already_app = True
-                            break
+                for app in apps_list:
+                    random_playlist = random.choice(playlists)
+                    spotify.play_playlist_by_url(app, random_playlist)
+                    sleep(random.randint(5, 10))
 
-                    if already_app:
-                        device.spotify_play_playlists(random.choice(playlists), app)
-                        device.device.sleep(random.randint(5, 10))
-                        device.device.press('home')
-                        ready_apps.append(app)
+                sleep(random.randint(600, 800))
 
-                #sleep(random.randint(600, 800))
-
-                # second step for play playlist on device
-                while True:
-                    for app in ready_apps:
-                        try:
-                            device.spotify_play_playlists(random.choice(playlists), app)
-                            device.device.sleep(random.randint(5, 10))
-                            device.device.press('home')
-                            break
-                        except Exception as e:
-                            print(f"Error playing music: {e}")
-                            device.spotify_close(app)
-                            pass
-
-                    device.spotify_start(random.choice(ready_apps))
-                    sleep(random.randint(10, 15))
 
 
         except Exception as e:
