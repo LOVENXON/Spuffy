@@ -1,5 +1,8 @@
 import random
 from time import sleep
+
+import uiautomator2
+
 from exec_files.AndroRPA.platforms.spotify import playback, connection
 from exec_files.AndroRPA.platforms.spotify.auth import Authentication
 from spotify_android_lib.spotify import Spotify
@@ -8,13 +11,19 @@ import json
 from pymsgbox import alert
 
 data_path = 'C:/AndroRPA/data'
-def main(serial, subscription='basic'):
+def main(serial_, subscription='basic'):
     while True:
         try:
-            spotify = playback.Playback(serial)
-            device = spotify.device
-            apps_list = Authentication(serial, subscription)
+            print('Starting')
+            spotify = playback.Playback(serial_)
+            device = uiautomator2.connect(serial)
+            apps_list = Authentication(serial_, subscription)
             apps_list = apps_list.spotify_apps_package_list
+            print(apps_list)
+
+            for app in apps_list:
+                device.app_stop(app)
+
 
             with open(f"{data_path}/playlists_file.json", 'r', encoding='utf-8') as f:
                 playlists_data = json.load(f)
@@ -38,11 +47,11 @@ def main(serial, subscription='basic'):
 if __name__ == "__main__":
     try:
         # validation -------------------------
-        from utils.utils_methods import get_system_uuid
-        from token__ import validate_jwt
+        """from utils.utils_methods import get_system_uuid
+        from token__ import validate_jwt"""
         import json
 
-        data_path = "c:/AndroRPA/data"
+        """data_path = "c:/AndroRPA/data"
         with open(f"{data_path}/token.json", 'r', encoding="utf-8") as f:
             token_data = json.load(f)
             jwt_token = token_data.get('token')
@@ -55,12 +64,13 @@ if __name__ == "__main__":
         r = validate_jwt(jwt_token, system_uuid)
         if not r['is_valid']:
             alert(title="Invalid token", text="Invalid token")
-            exit(1)
+            exit(1)"""
         from threading import Thread
 
         thread_list = []
         if len(list_devices()) > 0:
             for serial in list_devices():
+                #thread = Thread(target=main, args=(serial, user_subscription))
                 thread = Thread(target=main, args=(serial,))
                 thread_list.append(thread)
                 thread.start()
